@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PalatulCopiilor3.Mobile.ReservationsPage"
+             Title="Rezervările mele">
+
+    <VerticalStackLayout Padding="16" Spacing="12">
+
+        <Button Text="Refresh"
+                Clicked="OnRefreshClicked" />
+
+        <ActivityIndicator x:Name="Loading"
+                           IsVisible="False"
+                           IsRunning="False" />
+
+        <CollectionView x:Name="ReservationsList">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="12" Margin="0,6" BorderColor="#dddddd">
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="{Binding ActivityTitle}"
+                                   FontAttributes="Bold"
+                                   FontSize="16"/>
+
+                            <Label Text="{Binding StartAt, StringFormat='Data: {0:dd.MM.yyyy HH:mm}'}"
+                                   FontSize="13"/>
+
+                            <Label Text="{Binding DepartmentName, StringFormat='Departament: {0}'}"
+                                   FontSize="13"
+                                   Opacity="0.8"/>
+
+                            <Label Text="{Binding TeacherName, StringFormat='Profesor: {0}'}"
+                                   FontSize="13"
+                                   Opacity="0.8"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </VerticalStackLayout>
+</ContentPage>

@@ -1,0 +1,31 @@
+﻿@page
+@model Palatul_Copiilor.Pages.Reviews.CreateModel
+
+<h2>Lasă un review</h2>
+
+<form method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <input type="hidden" asp-for="Review.ReservationId" />
+
+    <div class="form-group">
+        <label asp-for="Review.Rating"></label>
+        <select asp-for="Review.Rating" class="form-control">
+            <option value="">-- Alege rating --</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <span asp-validation-for="Review.Rating" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Review.Comment"></label>
+        <textarea asp-for="Review.Comment" class="form-control"></textarea>
+        <span asp-validation-for="Review.Comment" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Trimite</button>
+</form>

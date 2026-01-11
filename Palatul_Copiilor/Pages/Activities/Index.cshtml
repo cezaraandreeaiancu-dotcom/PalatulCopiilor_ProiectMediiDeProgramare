@@ -1,0 +1,83 @@
+﻿@page
+@model Palatul_Copiilor.Pages.Activities.IndexModel
+
+@{
+    ViewData["Title"] = "Activități";
+}
+
+<!-- HEADER -->
+<div class="pc-card p-3 mb-3">
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+        <h2 class="m-0 pc-title">Activități</h2>
+
+        @if (User.IsInRole("Admin"))
+        {
+            <a class="btn btn-pc-primary" asp-page="Create">
+                + Adaugă activitate
+            </a>
+        }
+    </div>
+</div>
+
+<!-- LISTĂ ACTIVITĂȚI -->
+<div class="row g-3">
+    @foreach (var item in Model.Activity)
+    {
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="pc-card p-3 h-100 d-flex flex-column justify-content-between">
+
+                <!-- TITLU -->
+                <div>
+                    <h5 class="pc-title mb-2">🎯 @item.Title</h5>
+
+                    @if (item.Department != null)
+                    {
+                        <span class="badge rounded-pill text-bg-light mb-3"
+                              style="border:1px solid rgba(0,0,0,.08);">
+                            @item.Department.Name
+                        </span>
+                    }
+                </div>
+
+                <!-- BUTOANE -->
+                <div class="d-flex gap-2 flex-wrap mt-3">
+
+                    <!-- DETALII: TOȚI -->
+                    <a class="btn btn-pc-secondary btn-sm"
+                       asp-page="./Details"
+                       asp-route-id="@item.Id">
+                        Detalii
+                    </a>
+
+                    <!-- USER: REZERVĂ -->
+                    @if (User.Identity?.IsAuthenticated == true && !User.IsInRole("Admin"))
+                    {
+                        <a class="btn btn-success btn-sm"
+                           asp-page="/Reservations/Create"
+                           asp-route-activityId="@item.Id">
+                            Rezervă
+                        </a>
+                    }
+
+                    <!-- ADMIN: EDIT + DELETE -->
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a class="btn btn-pc-primary btn-sm"
+                           asp-page="./Edit"
+                           asp-route-id="@item.Id">
+                            Editează
+                        </a>
+
+                        <a class="btn btn-pc-accent btn-sm"
+                           asp-page="./Delete"
+                           asp-route-id="@item.Id">
+                            Șterge
+                        </a>
+                    }
+
+                </div>
+
+            </div>
+        </div>
+    }
+</div>

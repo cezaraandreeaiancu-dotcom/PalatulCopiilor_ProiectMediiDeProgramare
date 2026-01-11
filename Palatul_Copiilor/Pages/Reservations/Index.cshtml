@@ -1,0 +1,79 @@
+﻿@page
+@model Palatul_Copiilor.Pages.Reservations.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Rezervari</h1>
+
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a asp-page="Create">Create New</a>
+    </p>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Activity</th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reservation[0].ReservedAt)
+            </th>
+
+            @if (User.IsInRole("Admin"))
+            {
+                <th>Nume participant</th>
+            }
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Reservation)
+        {
+            <tr>
+                <td>
+                    @(item.Activity != null ? item.Activity.Title : "-")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReservedAt)
+                </td>
+
+                @if (User.IsInRole("Admin"))
+                {
+                    <td>@item.ParticipantName</td>
+                }
+
+                <td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a>
+                        <span> | </span>
+                        <a asp-page="./Details" asp-route-id="@item.Id">Details</a>
+                        <span> | </span>
+                        <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                    }
+                    else
+                    {
+                        <a asp-page="./Details" asp-route-id="@item.Id">Details</a>
+                        <span> | </span>
+                        <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                        <span> | </span>
+
+                        @if (item.Review == null)
+                        {
+                            <a asp-page="/Reviews/Create" asp-route-reservationId="@item.Id">Lasă review</a>
+                        }
+                        else
+                        {
+                            <span class="text-success">Review trimis</span>
+                        }
+                    }
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

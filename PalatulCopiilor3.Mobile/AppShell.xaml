@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:local="clr-namespace:PalatulCopiilor3.Mobile"
+       x:Class="PalatulCopiilor3.Mobile.AppShell">
+
+    <ShellContent
+        Title="Login"
+        ContentTemplate="{DataTemplate local:LoginPage}"
+        Route="login" />
+
+    <ShellContent
+        Title="Rezervări"
+        ContentTemplate="{DataTemplate local:ReservationsPage}"
+        Route="reservations" />
+    <FlyoutItem Title="Calendar">
+        <ShellContent ContentTemplate="{DataTemplate local:CalendarPage}" />
+    </FlyoutItem>
+
+
+</Shell>

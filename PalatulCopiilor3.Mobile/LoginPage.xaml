@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PalatulCopiilor3.Mobile.LoginPage"
+             Title="Autentificare">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="14">
+
+            <Label Text="Bine ai venit!"
+                   FontSize="28"
+                   FontAttributes="Bold" />
+
+            <Label Text="Conectează-te pentru a vedea rezervările tale."
+                   FontSize="14"
+                   Opacity="0.8"/>
+
+            <Entry x:Name="EmailEntry"
+                   Placeholder="Email"
+                   Keyboard="Email" />
+
+            <Entry x:Name="PasswordEntry"
+                   Placeholder="Parolă"
+                   IsPassword="True" />
+
+            <Button Text="Login"
+                    Clicked="OnLoginClicked" />
+
+            <ActivityIndicator x:Name="Loading"
+                               IsVisible="False"
+                               IsRunning="False" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

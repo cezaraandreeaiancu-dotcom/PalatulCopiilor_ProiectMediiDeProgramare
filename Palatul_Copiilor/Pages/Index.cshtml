@@ -1,0 +1,46 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Acasă";
+}
+
+<!-- HERO TEXT -->
+<div class="p-5 mb-4 bg-light rounded-3">
+    <div class="container-fluid py-4 text-center">
+        <h1 class="display-5 fw-bold">Palatul Copiilor</h1>
+        <p class="fs-5">
+            Platformă pentru gestionarea activităților educaționale și culturale.
+        </p>
+    </div>
+</div>
+
+<!-- HERO CARD -->
+<div class="pc-card p-4 mb-5">
+    <div class="row align-items-center g-4">
+
+        <!-- TEXT -->
+        <div class="col-md-6">
+            <h2 class="pc-title mb-3">Un loc al creativității și bucuriei</h2>
+            <p class="lead mb-4">
+                Descoperă activități educative și haideți să învățăm împreună.
+                Rezervă simplu și rapid.
+            </p>
+
+            <div class="d-flex gap-2 flex-wrap">
+                <a class="btn btn-pc-primary" asp-page="/Activities/Index">Activități</a>
+                <a class="btn btn-pc-secondary" asp-page="/Reservations/Index">Rezervări</a>
+                <a class="btn btn-pc-accent" asp-page="/Teachers/Index">Profesori</a>
+            </div>
+        </div>
+
+       
+        <div class="col-md-6 text-center d-flex justify-content-center">
+            <img src="~/images/copii.jpg"
+                 alt="Palatul Copiilor"
+                 class="img-fluid castle-img" />
+        </div>
+
+    </div>
+</div>
+
+

@@ -1,0 +1,80 @@
+﻿@page
+@model Palatul_Copiilor.Pages.Departments.IndexModel
+
+@{
+    ViewData["Title"] = "Departamente";
+}
+
+<!-- HEADER -->
+<div class="pc-card p-3 mb-3 pc-accent-purple">
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+        <div>
+            <h2 class="m-0 pc-title">Departamente</h2>
+            <div class="pc-subtle">Alege un departament pentru a vedea detalii și activități.</div>
+        </div>
+
+        @if (User.IsInRole("Admin"))
+        {
+            <a class="btn btn-pc-primary" asp-page="Create">+ Adaugă departament</a>
+        }
+    </div>
+</div>
+
+<!-- LISTĂ -->
+<div class="row g-3">
+    @foreach (var item in Model.Department)
+    {
+        // icon + accent în funcție de nume (poți schimba regulile)
+        var name = (item.Name ?? "").ToLowerInvariant();
+        var icon = "🏫";
+        var accent = "pc-accent-blue";
+
+        if (name.Contains("muz")) { icon = "🎵"; accent = "pc-accent-purple"; }
+        else if (name.Contains("art") || name.Contains("desen") || name.Contains("pict")) { icon = "🎨"; accent = "pc-accent-coral"; }
+        else if (name.Contains("sport") || name.Contains("dans")) { icon = "⚽"; accent = "pc-accent-green"; }
+        else if (name.Contains("info") || name.Contains("robot") || name.Contains("tech")) { icon = "🤖"; accent = "pc-accent-amber"; }
+
+        // număr activități (dacă Department are navigation property Activities)
+        var activitiesCount = item.Activities?.Count ?? 0;
+
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="pc-card p-3 h-100 d-flex flex-column justify-content-between @accent">
+                <div>
+                    <div class="d-flex justify-content-between align-items-start gap-2">
+                        <h5 class="pc-title mb-2">@icon @item.Name</h5>
+
+                        <span class="badge rounded-pill text-bg-light"
+                              style="border:1px solid rgba(0,0,0,.08);">
+                            @activitiesCount activități
+                        </span>
+                    </div>
+
+                    <div class="pc-subtle">Explorează activitățile din acest departament.</div>
+                </div>
+
+                <div class="d-flex gap-2 flex-wrap mt-3">
+                    <a class="btn btn-pc-secondary btn-sm"
+                       asp-page="./Details"
+                       asp-route-id="@item.Id">
+                        Detalii
+                    </a>
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a class="btn btn-pc-primary btn-sm"
+                           asp-page="./Edit"
+                           asp-route-id="@item.Id">
+                            Editează
+                        </a>
+
+                        <a class="btn btn-pc-accent btn-sm"
+                           asp-page="./Delete"
+                           asp-route-id="@item.Id">
+                            Șterge
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PalatulCopiilor3.Mobile.CalendarPage"
+             Title="Calendar">
+
+    <VerticalStackLayout Padding="12" Spacing="12">
+
+        <Label Text="Alege o zi:" FontAttributes="Bold" />
+
+        <DatePicker x:Name="DayPicker"
+                    DateSelected="OnDateSelected"/>
+
+        <Label Text="Rezervări în ziua selectată:" FontAttributes="Bold"/>
+
+        <CollectionView x:Name="DayReservations">
+            <CollectionView.EmptyView>
+                <Label Text="Nu există rezervări în această zi." Opacity="0.7"/>
+            </CollectionView.EmptyView>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="10" Margin="0,6" CornerRadius="12">
+                        <VerticalStackLayout>
+                            <Label Text="{Binding ActivityName}" FontAttributes="Bold"/>
+                            <Label Text="{Binding IntervalText}" FontSize="12"/>
+                            <Label Text="{Binding DetailsText}" FontSize="12" Opacity="0.7"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </VerticalStackLayout>
+</ContentPage>
